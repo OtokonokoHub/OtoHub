@@ -6,8 +6,5 @@ Yii::setAlias('console', dirname(dirname(__DIR__)) . '/console');
 
 session_set_save_handler(new common\SessionHandler);
 yii\base\Event::on("yii\web\User", yii\web\User::EVENT_AFTER_LOGIN, function($event){
-    if (session_status() !== PHP_SESSION_ACTIVE) {
-        session_start();
-    }
-    $_SESSION['username'] = $event->identity->username;
+    Yii::$app->session->set('username', $event->identity->username);
 });
