@@ -7,12 +7,10 @@ namespace common;
 class SessionHandler extends \SessionHandler implements \SessionHandlerInterface
 {
     public function write($id, $data){
-        var_dump(json_encode(self::unserialize($data)));
         return parent::write($id, json_encode(self::unserialize($data)));
     }
 
     public function read($id){
-        var_dump(json_decode(parent::read($id),true));
         return json_decode(parent::read($id), true);
     }
 
