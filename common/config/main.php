@@ -6,5 +6,9 @@ return [
             'class' => 'yii\web\CacheSession',
             'handler' => 'common\SessionHandler',
         ],
+        'request' => [
+            'class' => 'yii\web\Request',
+            'enableCookieValidation' => false,
+        ],
     ],
 ];
