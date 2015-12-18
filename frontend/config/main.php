@@ -15,6 +15,7 @@ return [
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
+            'identityCookie' => ['name' => '_identity', 'httpOnly' => true, 'domain' => '.otohub.moe'],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
