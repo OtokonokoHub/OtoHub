@@ -11,7 +11,7 @@ class m151219_111744_create_forward_table extends Migration
             'id' => $this->primaryKey()->notNull(),
             'post_id' => $this->integer()->notNull(),
             'user_id' => $this->integer()->notNull(),
-            'status'  => $this->smallInteger()->notNull()->defaultValue(0),
+            'status'  => $this->boolean()->notNull()->defaultValue(0),
             'time'    => $this->integer()->notNull(),
         ]);
         $this->createIndex('user_id_post_id','forward', ['post_id', 'user_id'], true);

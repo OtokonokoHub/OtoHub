@@ -7,7 +7,7 @@ class m151219_110450_update_post_image_table extends Migration
 {
     public function up()
     {
-        $this->addColumn('post_image', 'offset', $this->smallInteger()->notNull()->defaultValue(0));
+        $this->addColumn('post_image', 'offset', $this->boolean()->notNull()->defaultValue(0));
         $this->createIndex('postId_imageId_offset', 'post_image', ['postId', 'imageId', 'offset'], true);
         $this->createIndex('imageId', 'post_image', 'imageId');
     }

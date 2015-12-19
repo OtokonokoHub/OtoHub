@@ -11,7 +11,7 @@ class m151219_074325_create_message_table extends Migration
             'from_id' => $this->integer()->notNull(),
             'to_id'   => $this->integer()->notNull(),
             'content' => $this->text()->notNull(),
-            'status'  => $this->smallInteger()->notNull()->defaultValue(0),
+            'status'  => $this->boolean()->notNull()->defaultValue(0),
             'title'   => $this->string(32)->notNull(),
             'time'    => $this->integer()->notNull(),
         ]);
