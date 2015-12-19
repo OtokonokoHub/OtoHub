@@ -12,11 +12,11 @@ class m151219_074325_create_message_table extends Migration
             'to_id'   => $this->integer()->notNull(),
             'content' => $this->text()->notNull(),
             'status'  => $this->smallInteger()->notNull()->defaultValue(0),
-            'title'   => $this->string(32)->noNull(),
+            'title'   => $this->string(32)->notNull(),
             'time'    => $this->integer()->notNull(),
         ]);
-        $this->createIndex('to_id','message');
-        $this->createIndex('from_id','message');
+        $this->createIndex('to_id','message', 'to_id');
+        $this->createIndex('from_id','message', 'from_id');
     }
 
     public function down()
