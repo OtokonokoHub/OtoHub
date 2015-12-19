@@ -29,6 +29,10 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'request' => [
+            'class' => 'yii\web\Request',
+            'enableCookieValidation' => false,
+        ],
     ],
     'params' => $params,
 ];
