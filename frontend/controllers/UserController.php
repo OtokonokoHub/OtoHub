@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\PostForm;
 use Yii;
 use common\models\LoginForm;
 use frontend\models\SignupForm;
@@ -35,7 +36,10 @@ class UserController extends \yii\web\Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $model = new PostForm();
+        return $this->render('index',[
+            'model' => $model,
+        ]);
     }
 
     public function actionLogin()

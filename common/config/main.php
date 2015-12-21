@@ -2,8 +2,9 @@
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
+        'session' => [
+            'class' => 'yii\web\CacheSession',
+            'handler' => 'common\SessionHandler',
         ],
     ],
 ];

@@ -10,5 +10,8 @@ return [
         'created_at' => '1392559490',
         'updated_at' => '1392559490',
         'email' => 'sfriesen@jenkins.info',
+        'status' => 0,
+        'nick' => 'test',
+        'head_image' => 'D:\asdasd.jpg'
     ],
 ];

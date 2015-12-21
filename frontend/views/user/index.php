@@ -1,53 +1,40 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var $form yii\bootstrap\ActiveForm */
+/* @var $model \frontend\models\PostForm */
 
-$this->title = 'My Yii Application';
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+use kartik\file\FileInput;
+use yii\helpers\Url;
+
+$this->title = 'User Index';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-index">
+<div class="site-login">
+    <h1><?= Html::encode($this->title) ?></h1>
+    <h3>Add new post <a href="#" onclick="$('#post-form').toggle();return false;" style="font-size: 14px">show/hide</a></h3>
+    <div class="row">
+        <div class="col-lg-12">
+            <?php $form = ActiveForm::begin(['id' => 'post-form']); ?>
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
+            <?= $form->field($model, 'content')->textarea() ?>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+            <?= $form->field($model, 'images')->widget(FileInput::classname(), [
+                'options' => ['accept' => 'image/*','multiple' => true],
+                'pluginOptions' => ['uploadUrl' => Url::to(['/site/file-upload'])]
+            ]);
+            ?>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
+            <?= $form->field($model, 'tags')->textInput() ?>
 
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+            <div class="form-group">
+                <?= Html::submitButton('Post', ['class' => 'btn btn-primary', 'name' => 'post-button']) ?>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+            <?php ActiveForm::end(); ?>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
         </div>
-
     </div>
 </div>
