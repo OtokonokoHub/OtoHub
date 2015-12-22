@@ -62,7 +62,7 @@ class Post extends \yii\db\ActiveRecord
         $this->author = Yii::$app->user->getId();
         $result = parent::insert($runValidation, $attributes);
         if ($result) {
-            $f = fsockopen('/dev/shm/feed.sock');
+            $f = fsockopen('unix:///run/otohub/feed.sock');
             if ($f) {
                 fwrite($f, json_encode(['post_id' => $this->id, 'user_id' => Yii::$app->user->getId()]));
             }
