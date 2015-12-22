@@ -62,7 +62,7 @@ class Post extends \yii\db\ActiveRecord
     public function insert($runValidation = true, $attributes = NULL){
         $result = parent::insert($runValidation, $attributes);
         if ($result) {
-            $f = fsockopen('tcp://127.0.0.1', 5555);
+            $f = fsockopen('/dev/shm/feed.sock');
             if ($f) {
                 fwrite($f, json_encode(['post_id' => $this->id, 'user_id' => Yii::$app->user->getId()]));
             }
