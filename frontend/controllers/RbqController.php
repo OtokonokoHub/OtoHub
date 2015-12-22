@@ -19,6 +19,8 @@ class RbqController extends Controller
         $model = new \common\models\Post;
         $model->content = 'test';
         $model->hasImage = 0;
+        $model->save();
+        var_dump($model->getErrors());exit;
         return $this->render('index');
     }
 

@@ -10,6 +10,6 @@ return [
     'replies' => 0,
     'hasImage' => 0,
     'forward_total' => 0,
-    'time' => time(),
+    'created_at' => time(),
     'status' => 0,
 ];
