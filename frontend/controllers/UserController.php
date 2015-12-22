@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use frontend\models\PostForm;
 use Yii;
-use common\models\LoginForm;
+use frontend\models\LoginForm;
 use frontend\models\SignupForm;
 use yii\filters\AccessControl;
 use frontend\models\PasswordResetRequestForm;
