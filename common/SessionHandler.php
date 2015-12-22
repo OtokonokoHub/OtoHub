@@ -3,29 +3,20 @@ namespace common;
 
 use Yii;
 use yii\base\Exception;
-use yii\caching\Cache;
-use yii\di\Instance;
-
 /**
 * 
 */
 class SessionHandler extends \SessionHandler implements \SessionHandlerInterface
 {
-    public $cache = 'cache';
-
-    public function __construct()
-    {
-        $this->cache = Instance::ensure($this->cache, Cache::className());
-    }
 
     public function write($id, $data){
-        return $this->cache->set($id, json_encode($data));
+        return parent::write($id, json_encode(self::unserialize($data)));
     }
 
     public function read($id){
-        $data = $this->cache->get($id);
-        if($data){
-            return json_decode($data, true);
+        $data = json_decode(parent::read($id), true);
+        if(!empty($data)){
+            return $data;
         } else {
             return '';
         }

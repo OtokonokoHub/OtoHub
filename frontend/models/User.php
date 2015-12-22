@@ -33,7 +33,7 @@ class User extends \common\models\User
     public function rules()
     {
         return [
-            [['username', 'auth_key', 'password_hash', 'email'], 'required'],
+            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
             [['status', 'created_at', 'updated_at'], 'integer'],
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
