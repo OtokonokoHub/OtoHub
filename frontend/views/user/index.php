@@ -17,13 +17,24 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3>Add new post <a href="#" onclick="$('#post-form').toggle();return false;" style="font-size: 14px">show/hide</a></h3>
     <div class="row">
         <div class="col-lg-12">
-            <?php $form = ActiveForm::begin(['id' => 'post-form']); ?>
+            <?php
+                $form = ActiveForm::begin([
+                    'id' => 'post-form',
+                    'action' => ['post/create'],
+                    'options' => [
+                        'enctype' => 'multipart/form-data',
+
+                    ]
+                ]);
+            ?>
 
             <?= $form->field($model, 'content')->textarea() ?>
 
-            <?= $form->field($model, 'images')->widget(FileInput::classname(), [
-                'options' => ['accept' => 'image/*','multiple' => true],
-                'pluginOptions' => ['uploadUrl' => Url::to(['/site/file-upload'])]
+            <?= FileInput::widget([
+                'model' => $model,
+                'attribute' => 'images[]',
+                'options' => ['multiple' => true],
+                'pluginOptions' => ['showUpload' => false],
             ]);
             ?>
 
