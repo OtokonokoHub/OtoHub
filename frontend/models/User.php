@@ -64,6 +64,6 @@ class User extends \common\models\User
     public function getPosts()
     {
         return $this->hasMany(Post::className(),['id' => 'user_id'])
-            ->viaTable('user_post',['id' => 'post_id']);
+            ->viaTable('user_post',['post_id' => 'id']);
     }
 }
