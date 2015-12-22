@@ -16,7 +16,9 @@ class RbqController extends Controller
      */
     public function actionIndex()
     {
-        
+        $model = new \common\models\Post;
+        $model->content = 'test';
+        $model->hasImage = 0;
         return $this->render('index');
     }
 
