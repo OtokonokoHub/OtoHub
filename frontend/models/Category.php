@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace frontend\models;
 
 use Yii;
 
@@ -26,10 +26,44 @@ class Category extends \common\models\Category
     }
 
     public static function findOneByAlias($alias){
-        $data = \Yii::$app->cache->get("category.{$alias}");
+        $data = \Yii::$app->cache->get("category.alias.{$alias}");
         if (empty($data)) {
-            $data = parent::findOne(['alias' => $alias])->asArray();
-            \Yii::$app->cache->set("category.{$alias}", $data);
+            $data = parent::findOne([
+                'alias'  => $alias,
+                'status' => 0,
+                ]);
+            \Yii::$app->cache->set("category.alias.{$alias}", $data);
+        }
+        else if($data->status != 0){
+            $data = null;
+        }
+        return $data;
+    }
+
+    public function getParent(){
+        if ($this->parent == 0) {
+            return null;
+        }
+        $data = \Yii::$app->cache->get("category.id.{$this->id}");
+        if (empty($data)) {
+            $data = parent::findOne([
+                'id'     => $this->parent,
+                'status' => 0,
+                ]);
+            \Yii::$app->cache->set("category.id.{$this->id}", $data);
+        }
+        else if($data->status != 0){
+            $data = null;
+        }
+        return $data;
+    }
+    public function getChilds(){
+        $data = \Yii::$app->cache->get("category.child.{$this->id}");
+        if (empty($data)) {
+            $data = static::findAll([
+                'parent' => $this->id,
+            ]);
+            \Yii::$app->cache->set("category.child.{$this->id}", $data);
         }
         return $data;
     }

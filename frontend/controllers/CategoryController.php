@@ -16,7 +16,13 @@ class CategoryController extends \yii\web\Controller
 {
     public function actionIndex()
     {
-        var_dump(\Yii::$app->request->get('alias'));
+        $category = \frontend\models\Category::findOneByAlias(\Yii::$app->request->get('alias'));
+        $childs   = $category->getChilds();
+        $parent   = $category->getParent();
+        echo '<pre>';
+        var_dump($category);
+        var_dump($parent);
+        var_dump($childs);
         /*return $this->render('index',[
         ]);*/
     }

@@ -39,11 +39,11 @@ return [
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'suffix' =>'.homo',
-            'rules' => [
+            'showScriptName'  => false,
+            'suffix'          =>'.homo',
+            'rules'           => [
                 'category/<alias:[a-z-]+>' => 'category',
-                '<controller:[\w-\d]+>/<action:[\w-\d]+>' => '<controller>/<action>',
+                '<controller:[\w-]+>/<action:[\w-]+>' => '<controller>/<action>',
             ],
         ],
     ],
