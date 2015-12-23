@@ -19,6 +19,10 @@ use Yii;
  */
 class Post extends \common\models\Post
 {
+
+    public function behaviors(){
+        return array_merge(\frontend\components\PostBehavior::className(), parent::behaviors());
+    }
     /**
      * @inheritdoc
      */

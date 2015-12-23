@@ -35,9 +35,6 @@ class PostForm extends Post
         if($this->validate()){
             $post = new Post();
             $post->content = $this->content;
-            $post->likes = 0;
-            $post->replies = 0;
-            $post->RTs = 0;
             $post->author = Yii::$app->getUser()->getId();
             $post->hasImage = sizeof($this->images) > 0;
             Event::trigger($this,self::BEFORE_POST_CREATE,['post' => $post]);
