@@ -36,7 +36,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             [['alias', 'label', 'thumb', 'parent'], 'required'],
-            ['alias', 'match', 'pattern' => '/^[a-z-]$/'],
+            ['alias', 'match', 'pattern' => '/^[a-z-]+$/'],
             [['parent', 'status', 'thumb'], 'integer'],
             [['alias', 'meta_title', 'meta_keywords', 'label'], 'string', 'max' => 64],
             [['meta_description', 'path', 'description'], 'string', 'max' => 255],

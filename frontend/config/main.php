@@ -37,6 +37,15 @@ return [
             'class' => 'yii\web\Request',
             'enableCookieValidation' => false,
         ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'suffix' =>'.homo',
+            'rules' => [
+                'category/<alias:[a-z-]+>' => 'category',
+                '<controller:[\w-\d]+>/<action:[\w-\d]+>' => '<controller>/<action>',
+            ],
+        ],
     ],
     'params' => $params,
 ];
