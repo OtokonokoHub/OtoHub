@@ -39,7 +39,9 @@ class User extends \common\models\User
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
             [['email'], 'unique'],
-            [['password_reset_token'], 'unique']
+            [['password_reset_token'], 'unique'],
+            ['nick' ,'unique'],
+            [['head_image', 'nick'], 'string', ['max' => 32]],
         ];
     }
 
