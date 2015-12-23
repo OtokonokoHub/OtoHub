@@ -21,7 +21,9 @@ class Post extends \common\models\Post
 {
 
     public function behaviors(){
-        return array_merge(\frontend\components\PostBehavior::className(), parent::behaviors());
+        $result = parent::behaviors();
+        $result[] =\frontend\components\PostBehavior::className();
+        return $result;
     }
     /**
      * @inheritdoc
