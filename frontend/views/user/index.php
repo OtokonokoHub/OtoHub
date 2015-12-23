@@ -7,7 +7,6 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use kartik\file\FileInput;
-use yii\helpers\Url;
 
 $this->title = 'User Index';
 $this->params['breadcrumbs'][] = $this->title;
@@ -30,10 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= $form->field($model, 'content')->textarea() ?>
 
-            <?= FileInput::widget([
-                'model' => $model,
-                'attribute' => 'images[]',
-                'options' => ['multiple' => true],
+            <?= $form->field($model, 'images[]')->widget(FileInput::classname(), [
+                'options' => ['accept' => 'image/*', 'multiple' => true],
                 'pluginOptions' => ['showUpload' => false],
             ]);
             ?>

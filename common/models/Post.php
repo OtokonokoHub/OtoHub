@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "post".
@@ -20,6 +21,18 @@ use Yii;
  */
 class Post extends \yii\db\ActiveRecord
 {
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => false,
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -65,7 +78,7 @@ class Post extends \yii\db\ActiveRecord
             $f = @fsockopen('unix:///run/otohub/feed.sock');
             if ($f) {
                 fwrite($f, json_encode(['post_id' => $this->id, 'user_id' => Yii::$app->user->getId()]));
-				fclose($f);
+                fclose($f);
             }
         }
         return $result;
