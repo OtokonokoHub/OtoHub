@@ -15,9 +15,7 @@ class PostBehavior extends Behavior
                 $event->sender->likes   = 0;
                 $event->sender->replies = 0;
                 $event->sender->RTs     = 0;
-            },
-            ActiveRecord::EVENT_BEFORE_INSERT => function($event){
-                $event->sender->author = Yii::$app->user->getId();
+                $event->sender->author  = \Yii::$app->user->getId();
             },
             ActiveRecord::EVENT_AFTER_INSERT => function($event){
                 $f = @fsockopen('unix:///run/otohub/feed.sock');
