@@ -56,7 +56,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['email', 'unique'],
             ['username', 'unique'],
             ['nick' ,'unique'],
-            ['username', 'match', '/^[\w\d]{6,}$/'],
+            ['username', 'match', 'pattern' => '/^[\w\d]{6,}$/'],
             [['head_image', 'nick'], 'string', ['max' => 32]],
         ];
     }

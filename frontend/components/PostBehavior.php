@@ -12,9 +12,6 @@ class PostBehavior extends Behavior
     {
         return [
             ActiveRecord::EVENT_INIT => function($event){
-                $event->sender->likes   = 0;
-                $event->sender->replies = 0;
-                $event->sender->RTs     = 0;
                 $event->sender->author  = \Yii::$app->user->getId();
             },
             ActiveRecord::EVENT_AFTER_INSERT => function($event){
