@@ -11,9 +11,6 @@ class PostBehavior extends Behavior
     public function events()
     {
         return [
-            ActiveRecord::EVENT_INIT => function($event){
-                $event->sender->author  = \Yii::$app->user->getId();
-            },
             ActiveRecord::EVENT_AFTER_INSERT => function($event){
                 $f = @fsockopen('unix:///run/otohub/feed.sock');
                 if ($f) {

@@ -4,6 +4,8 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\SluggableBehavior;
 
 /**
  * This is the model class for table "post".
@@ -26,9 +28,18 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             [
-                'class' => TimestampBehavior::className(),
+                'class'              => TimestampBehavior::className(),
                 'createdAtAttribute' => 'created_at',
                 'updatedAtAttribute' => false,
+            ],
+            [
+                'class'              => BlameableBehavior::className(),
+                'createdByAttribute' => 'author',
+                'updatedByAttribute' => false,
+            ],
+            [
+                'class'         => SluggableBehavior::className(),
+                'slugAttribute' => 'alias',
             ],
         ];
     }
