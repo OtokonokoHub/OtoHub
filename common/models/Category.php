@@ -29,6 +29,12 @@ class Category extends \yii\db\ActiveRecord
         return 'category';
     }
 
+    public function behaviors(){
+        return [
+            common\components\CategoryBehavior::classname(),
+        ];
+    }
+
     /**
      * @inheritdoc
      */

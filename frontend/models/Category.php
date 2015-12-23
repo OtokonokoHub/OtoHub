@@ -62,6 +62,7 @@ class Category extends \common\models\Category
         if (empty($data)) {
             $data = static::findAll([
                 'parent' => $this->id,
+                'status' => 0,
             ]);
             \Yii::$app->cache->set("category.child.{$this->id}", $data);
         }
