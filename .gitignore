@@ -29,5 +29,6 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 .tag*
-composer.lock
 .phpintel/
+# upload dir 
+/frontend/web/uploads
