@@ -22,7 +22,11 @@ class Post extends \common\models\Post
 
     public function behaviors(){
         $result = parent::behaviors();
-        $result[] =\frontend\components\PostBehavior::className();
+        $result[] = \frontend\components\PostBehavior::className();
+        $result[] = [
+                'class'         => SluggableBehavior::className(),
+                'slugAttribute' => 'alias',
+            ];
         return $result;
     }
     /**

@@ -18,7 +18,7 @@ class PostSearch extends Post
     public function rules()
     {
         return [
-            [['id', 'likes', 'RTs', 'replies', 'hasImage', 'author', 'forward_total', 'time', 'status'], 'integer'],
+            [['id', 'likes', 'RTs', 'replies', 'hasImage', 'created_by', 'created_at', 'status'], 'integer'],
             [['content'], 'safe'],
         ];
     }
@@ -61,9 +61,8 @@ class PostSearch extends Post
             'RTs' => $this->RTs,
             'replies' => $this->replies,
             'hasImage' => $this->hasImage,
-            'author' => $this->author,
-            'forward_total' => $this->forward_total,
-            'time' => $this->time,
+            'created_by' => $this->created_by,
+            'created_at' => $this->created_at,
             'status' => $this->status,
         ]);
 

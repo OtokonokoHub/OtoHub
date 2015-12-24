@@ -32,8 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'replies',
             // 'hasImage',
             // 'author',
-            // 'forward_total',
-            // 'time:datetime',
+            // 'created_at:datetime',
             // 'status',
 
             ['class' => 'yii\grid\ActionColumn'],

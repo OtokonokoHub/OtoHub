@@ -32,3 +32,4 @@ phpunit.phar
 .phpintel/
 # upload dir 
 /frontend/web/uploads
+tests/codeception/common/fixtures/data/post.php

@@ -36,10 +36,7 @@ class Post extends \yii\db\ActiveRecord
                 'class'              => BlameableBehavior::className(),
                 'updatedByAttribute' => false,
             ],
-            [
-                'class'         => SluggableBehavior::className(),
-                'slugAttribute' => 'alias',
-            ],
+            
         ];
     }
 

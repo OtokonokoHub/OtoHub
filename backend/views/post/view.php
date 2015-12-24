@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'RTs',
             'replies',
             'hasImage',
-            'author',
+            'created_by',
             'forward_total',
             'time:datetime',
             'status',

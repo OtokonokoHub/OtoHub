@@ -13,14 +13,36 @@ class PostFixture extends ActiveFixture
     public $depends    = ['tests\codeception\common\fixtures\UserFixture'];
     public function load(){
         $this->resetTable();
-        $this->data = [];
-        $table      = $this->getTableSchema();
-        $ids        = \common\models\User::find()->column();
-        foreach ($this->getData() as $alias => $row) {
+        $table = $this->getTableSchema();
+        $ids   = \common\models\User::find()->column();
+        $wait  = $this->getData();
+        $bat   = [];
+        while (count($wait)>0) {
+            $item = array_shift($wait);
             shuffle($ids);
-            $row['author'] = $ids[0];
-            $primaryKeys = $this->db->schema->insert($table->fullName, $row);
-            $this->data[$alias] = array_merge($row, $primaryKeys);
+            $push = [];
+            $push[] = $item['content'];
+            $push[] = $item['likes'];
+            $push[] = $item['RTs'];
+            $push[] = $item['replies'];
+            $push[] = $item['hasImage'];
+            $push[] = $ids[0];
+            $push[] = $item['created_at'];
+            $push[] = $item['status'];
+            $bat[] = $push;
+            if (count($bat) == 3000 || count($wait) == 0) {
+                echo time();
+                echo "\r\n";
+                $sql = $this->db->createCommand()->batchInsert($table->fullName, ['content', 'likes', 'RTs', 'replies', 'hasImage', 'created_by', 'created_at', 'status'], $bat);
+                unset($bat);
+                echo time();
+                echo "\r\n";
+                $sql->execute();
+                echo time();
+                echo "\r\n\r\n\r\n";
+                $bat = [];
+            }
         }
+        
     }
 }
