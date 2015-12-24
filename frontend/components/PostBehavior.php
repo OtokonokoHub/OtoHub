@@ -18,7 +18,8 @@ class PostBehavior extends Behavior
                     fclose($f);
                 }
                 else{
-
+                    $queue = new \frontend\models\PostFeedQueue(['post_id' => $event->sender->id]);
+                    $queue->save();
                 }
             },
         ];
