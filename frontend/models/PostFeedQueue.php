@@ -27,8 +27,8 @@ class PostFeedQueue extends \yii\db\ActiveRecord
     {
         return [
             [['post_id'], 'required'],
-            [['post_id'], 'integer'],
-            [['post_id'], 'unique']
+            [['post_id', 'forward_id'], 'integer'],
+            [['post_id', 'forward_id'], 'unique']
         ];
     }
 
