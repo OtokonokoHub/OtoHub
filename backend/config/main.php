@@ -29,6 +29,13 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'itemTable' => 'admin_auth_item',
+            'itemChildTable' => 'admin_auth_item_child',
+            'assignmentTable' => 'admin_auth_assignment',
+            'ruleTable' => 'admin_auth_rule',
+        ],
     ],
     'params' => $params,
 ];
