@@ -34,7 +34,6 @@ class Post extends \yii\db\ActiveRecord
             ],
             [
                 'class'              => BlameableBehavior::className(),
-                'createdByAttribute' => 'author',
                 'updatedByAttribute' => false,
             ],
             [
@@ -58,9 +57,9 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content', 'hasImage', 'author'], 'required'],
+            [['content', 'hasImage', 'created_by'], 'required'],
             [['content'], 'string'],
-            [['likes', 'RTs', 'replies', 'hasImage', 'author', 'created_at', 'status'], 'integer']
+            [['likes', 'RTs', 'replies', 'hasImage', 'created_by', 'created_at', 'status'], 'integer']
         ];
     }
 
@@ -76,7 +75,7 @@ class Post extends \yii\db\ActiveRecord
             'RTs' => 'Rts',
             'replies' => 'Replies',
             'hasImage' => 'Has Image',
-            'author' => 'Author',
+            'created_by' => 'Author',
             'forward_total' => 'Forward Total',
             'status' => 'Status',
         ];
