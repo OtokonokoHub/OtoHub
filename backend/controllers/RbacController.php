@@ -25,11 +25,10 @@ class RbacController extends \yii\web\Controller
             'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
             ]);
-        
     }
 
     public function actionCreate(){
-        $role = new \yii\rbac\Role(\Yii::$app->request->post($this->_userType.'Role'));
+        $role = new \yii\rbac\Role(\Yii::$app->request->post($this->_userType.'Item'));
         $this->_authManager->add($role);
         return $this->redirect(['rbac/index', 'user_type' => $this->_userType]);
     }
@@ -47,17 +46,24 @@ class RbacController extends \yii\web\Controller
 
     public function actionDeleteMulit(){
         $names = \Yii::$app->request->post('selection');
-        $result = call_user_func_array(["\backend\models\\".$this->_userType."Role", 'deleteAll'], [['name' => $names]]);
+        $result = call_user_func_array(["\backend\models\\".$this->_userType."Item", 'deleteAll'], [['name' => $names, 'type' => \yii\rbac\Item::TYPE_ROLE]]);
         return $this->redirect(['rbac/index', 'user_type' => $this->_userType]);
     }
 
-    protected function findModel($id)
-    {
-        if (($model = \backend\models\UserRole::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
+    public function actionPermissionIndex(){
+        $searchModel = \Yii::createObject("\backend\models\\".$this->_userType."PermissionSearch");
+        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
+        return $this->renderAjax('rule_list', [
+            'searchModel'  => $searchModel,
+            'dataProvider' => $dataProvider,
+            ]);
+    }
+
+    public function actionPermissionCreate(){
+        $role = new \yii\rbac\Permission(\Yii::$app->request->post($this->_userType.'Item'));
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $result = @$this->_authManager->add($role);
+        echo json_encode($result);
     }
 
 }

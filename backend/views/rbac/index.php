@@ -18,8 +18,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?php \yii\bootstrap\Modal::begin(['id' => 'create-role', 'toggleButton' => [
-            'label' => 'Create Role',
-            'class' => 'btn btn-success',
+            'label'  => 'Create Role',
+            'class'  => 'btn btn-success',
+            'header' => "<h4 class=\"name modal-title\">创建角色</h4>",
             ]]); ?>
             <div class="post-form">
                 <?php $form = ActiveForm::begin(['action' => ['rbac/create', 'user_type' => \Yii::$app->request->get('user_type')], 'method' => 'post']); ?>
@@ -27,11 +28,31 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'name')->textInput() ?>
                 <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
                 <div class="form-group">
-                    <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                    <?= Html::submitButton('Create', ['class' => 'btn btn-success']) ?>
+                </div>
+                <?php ActiveForm::end(); ?>
+
+            </div>
+        <?php \yii\bootstrap\Modal::end(); ?>
+        <?php \yii\bootstrap\Modal::begin(['id' => 'manage-permission', 'toggleButton' => [
+            'label'  => 'Manage Permission',
+            'class'  => 'btn btn-success',
+            'header' => "<h4 class=\"name modal-title\">创建行为</h4>",
+            ]]); ?>
+            <div class="post-form">
+                <?php $form = ActiveForm::begin(['action' => 'javascript:void']); ?>
+                <?php $model = \Yii::createObject(get_parent_class($dataProvider->query->modelClass)); ?>
+                <?= $form->field($model, 'name')->textInput(['id' => 'permission-name']) ?>
+                <?= $form->field($model, 'description')->textarea(['rows' => 6, 'id' => 'permission-description']) ?>
+                <div class="form-group">
+                    <?= Html::submitButton('Create', ['class' => 'btn btn-success', 'id' => 'create-permission']) ?>
                 </div>
 
                 <?php ActiveForm::end(); ?>
 
+            </div>
+            <div id="permission-list">
+                    
             </div>
         <?php \yii\bootstrap\Modal::end(); ?>
     </p>
@@ -61,13 +82,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons'  => [
                     'view' => function($url, $model, $key) {
                         $options = [
-                            'title' => Yii::t('yii', 'View'),
-                            'aria-label' => Yii::t('yii', 'View'),
-                            'data-pjax' => '0',
+                            'title'       => Yii::t('yii', 'View'),
+                            'aria-label'  => Yii::t('yii', 'View'),
+                            'data-pjax'   => '0',
                             'data-target' => '#view-modal',
                             'data-toggle' => 'modal',
-                            'class' => 'view-button',
-                            'data-url' => \yii\helpers\Url::to(['rbac/view', 'user_type' => \Yii::$app->request->get('user_type'), 'id' => $key]),
+                            'class'       => 'view-button',
+                            'data-url'    => \yii\helpers\Url::to(['rbac/view', 'user_type' => \Yii::$app->request->get('user_type'), 'id' => $key]),
                         ];
                         return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', "javascript:void;", $options);
                     },
@@ -81,4 +102,6 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <script>
         url = {};
+        url['permission_index']  = '<?php echo \yii\helpers\Url::to(['rbac/permission-index', 'user_type' => \Yii::$app->request->get('user_type')]); ?>';
+        url['permission_create'] = '<?php echo \yii\helpers\Url::to(['rbac/permission-create', 'user_type' => \Yii::$app->request->get('user_type')]); ?>';
 </script>

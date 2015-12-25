@@ -20,7 +20,7 @@ use Yii;
  * @property AuthItemChild[] $authItemChildren
  * @property AuthItemChild[] $authItemChildren0
  */
-class Role extends \yii\db\ActiveRecord
+class Item extends \yii\db\ActiveRecord
 {
 
     /**

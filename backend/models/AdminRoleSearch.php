@@ -7,7 +7,8 @@ use Yii;
 /**
  * PostSearch represents the model behind the search form about `common\models\Post`.
  */
-class AdminRoleSearch extends AdminRole
+class AdminRoleSearch extends AdminItem
 {
-    use RoleSearch;
+    public $type = \yii\rbac\Item::TYPE_ROLE;
+    use ItemSearch;
 }

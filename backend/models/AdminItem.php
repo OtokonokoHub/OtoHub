@@ -17,13 +17,13 @@ use Yii;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class UserRole extends \common\models\Role
+class AdminItem extends \common\models\Item
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'auth_item';
+        return 'admin_auth_item';
     }
 }

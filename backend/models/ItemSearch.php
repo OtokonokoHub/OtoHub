@@ -9,7 +9,7 @@ use yii\data\ActiveDataProvider;
 /**
  * PostSearch represents the model behind the search form about `common\models\Post`.
  */
-trait RoleSearch
+trait ItemSearch
 {
     public function rules()
     {
@@ -57,6 +57,7 @@ trait RoleSearch
         ]);
 
         $query->andFilterWhere(['like', 'description', $this->description]);
+        $query->andWhere(['type' => $this->type]);
 
         return $dataProvider;
     }
