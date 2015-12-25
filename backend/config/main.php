@@ -36,6 +36,9 @@ return [
             'assignmentTable' => 'admin_auth_assignment',
             'ruleTable' => 'admin_auth_rule',
         ],
+        'authUserManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
     ],
     'params' => $params,
 ];
