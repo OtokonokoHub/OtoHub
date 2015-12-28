@@ -102,6 +102,6 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <script>
         url = {};
-        url['permission_index']  = '<?php echo \yii\helpers\Url::to(['rbac/permission-index', 'user_type' => \Yii::$app->request->get('user_type')]); ?>';
+        url['permission_index']  = '<?php echo \yii\helpers\Url::to(['rbac/permission-index', 'user_type' => \Yii::$app->request->get('user_type'), 'per-page' => 5]); ?>';
         url['permission_create'] = '<?php echo \yii\helpers\Url::to(['rbac/permission-create', 'user_type' => \Yii::$app->request->get('user_type')]); ?>';
 </script>

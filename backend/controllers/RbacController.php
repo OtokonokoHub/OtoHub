@@ -62,8 +62,18 @@ class RbacController extends \yii\web\Controller
     public function actionPermissionCreate(){
         $role = new \yii\rbac\Permission(\Yii::$app->request->post($this->_userType.'Item'));
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $result = @$this->_authManager->add($role);
-        echo json_encode($result);
+        try {
+            $result = @$this->_authManager->add($role);
+            echo json_encode($result);
+        } catch (\Exception $e) {
+            echo json_encode($e);
+        }
+        
+        
+    }
+
+    public function actionPermissionDelete(){
+
     }
 
 }

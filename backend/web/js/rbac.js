@@ -1,10 +1,19 @@
 function reflush(){
     $.get(url.permission_index, function(data){
         $('#permission-list').html(data);
+        $('#permission-list .pagination a').click(permissionChangePage);
     });
 }
+permissionChangePage = function(event) {
+            var url = $(this).attr('href');
+            $.get(url, function(data) {
+                $('#permission-list').html(data);
+                $('#permission-list .pagination a').click(permissionChangePage);
+            });
+            event.preventDefault();
+        };
 jQuery(document).ready(function($) {
-    reflush();
+    
     $('#create-permission').click(function(event) {
         var form = $(this).parent().parent();
         $.post(url.permission_create, {
@@ -12,7 +21,12 @@ jQuery(document).ready(function($) {
             'AdminItem[name]': form.find('#permission-name').val(),
             'AdminItem[description]': form.find('#permission-description').val(),
         }, function(data, textStatus, xhr) {
-            /*optional stuff to do after success */
+            if (data.hasOwnProperty('errorInfo')) {
+                alert(data.errorInfo);
+            }
+            else{
+                reflush();
+            }
         });
     });
     $('.view-button').click(function(event) {
@@ -21,4 +35,5 @@ jQuery(document).ready(function($) {
             $('#view-modal').find('.modal-body').html(data.description);
         });
     });
+    reflush();
 });
