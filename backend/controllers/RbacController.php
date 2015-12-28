@@ -68,12 +68,14 @@ class RbacController extends \yii\web\Controller
         } catch (\Exception $e) {
             echo json_encode($e);
         }
-        
-        
     }
 
-    public function actionPermissionDelete(){
-
+    public function actionPermissionDelete($id){
+        $role = $this->_authManager->getPermission($id);
+        $this->_authManager->remove($role);
     }
 
+    public function actionPermissionDeleteMulit(){
+
+    }
 }

@@ -1,19 +1,29 @@
-function reflush(){
-    $.get(url.permission_index, function(data){
+function reflush(_url){
+    if (!_url) {
+        _url = url.permission_index;
+    };
+    $.get(_url, function(data){
         $('#permission-list').html(data);
         $('#permission-list .pagination a').click(permissionChangePage);
+        $('#permission-list .table a[aria-label=Delete]').click(permissionDelete);
     });
 }
 permissionChangePage = function(event) {
-            var url = $(this).attr('href');
-            $.get(url, function(data) {
-                $('#permission-list').html(data);
-                $('#permission-list .pagination a').click(permissionChangePage);
-            });
-            event.preventDefault();
-        };
+    var _url = $(this).attr('href');
+    url['current_permission_index'] = _url;
+    reflush(_url);
+    event.preventDefault();
+};
+permissionDelete = function(event){
+    var _url = $(this).attr('href');
+    $.post(_url, {}, function(data, textStatus, xhr) {
+        reflush(url.current_permission_index);
+    });
+    event.preventDefault();
+    return false;
+}
+
 jQuery(document).ready(function($) {
-    
     $('#create-permission').click(function(event) {
         var form = $(this).parent().parent();
         $.post(url.permission_create, {
@@ -27,6 +37,15 @@ jQuery(document).ready(function($) {
             else{
                 reflush();
             }
+        });
+    });
+    $('#delete-mulit-permission').submit(function(event) {
+        var params = {'_csrf': form.find('[name=_csrf]').val()};
+        event.preventDefault();
+        $.post(url.permission_delete_mulit, {
+            'selection[]': ''
+        }, function(data, textStatus, xhr) {
+            /*optional stuff to do after success */
         });
     });
     $('.view-button').click(function(event) {
