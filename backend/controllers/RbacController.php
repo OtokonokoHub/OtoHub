@@ -76,6 +76,7 @@ class RbacController extends \yii\web\Controller
     }
 
     public function actionPermissionDeleteMulit(){
-
+        $names = \Yii::$app->request->post('selection');
+        $result = call_user_func_array(["\backend\models\\".$this->_userType."Item", 'deleteAll'], [['name' => $names, 'type' => \yii\rbac\Item::TYPE_PERMISSION]]);
     }
 }

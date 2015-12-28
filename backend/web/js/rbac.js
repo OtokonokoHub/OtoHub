@@ -38,15 +38,19 @@ jQuery(document).ready(function($) {
                 reflush();
             }
         });
+        event.preventDefault();
     });
     $('#delete-mulit-permission').submit(function(event) {
-        var params = {'_csrf': form.find('[name=_csrf]').val()};
+        var params = {'_csrf': $(this).find('[name=_csrf]').val()};
+        var checkboxs = $('#permission-list tbody [type=checkbox]:checked');
+        for (var i = 0; i < checkboxs.length; i++) {
+            params['selection['+ i +']'] = checkboxs[i].value;
+        };
         event.preventDefault();
-        $.post(url.permission_delete_mulit, {
-            'selection[]': ''
-        }, function(data, textStatus, xhr) {
-            /*optional stuff to do after success */
+        $.post(url.permission_delete_mulit, params, function(data, textStatus, xhr) {
+            reflush(url.current_permission_index);
         });
+        return false;
     });
     $('.view-button').click(function(event) {
         $.get($(this).attr('data-url'), function(data) {
